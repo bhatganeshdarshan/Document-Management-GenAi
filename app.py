@@ -1,14 +1,8 @@
-import os, base64, json
-import google.generativeai as genai
+import os
 from flask import Flask, render_template, make_response, request, flash
 from xhtml2pdf import pisa
 from pdfminer.high_level import extract_text
 from werkzeug.utils import secure_filename
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.docstore.document import Document
-from langchain.prompts import PromptTemplate
-from langchain.chains.summarize import load_summarize_chain
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 import langchain_gemini_utils as lg
 from dotenv import load_dotenv
 load_dotenv()
@@ -17,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.htm')
+    return render_template('home.html')
 
 @app.route('/generate-pdf', methods=['POST'])
 def generate_pdf():
@@ -66,4 +60,4 @@ def summarise_route():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
